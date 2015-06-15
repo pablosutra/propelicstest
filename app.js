@@ -4,16 +4,19 @@ var app = angular.module('app', [
     'ngRoute',
     'ngSanitize',
     'ui.bootstrap',
-    'layoutDirectives'
+    'layoutDirectives',
+    'ItemsService',
+    'WishlistCtrl'
 ]);
 
 app.config(['$routeProvider',
     function($routeProvider) {
-        $routeProvider.when('/items', {
-            templateUrl: 'views/listItems.html'
+        $routeProvider.when('/wishlist', {
+            templateUrl: 'views/listItems.html',
+            controller: 'WishlistCtrl'
         }).
         otherwise({
-            redirectTo: '/items'
+            redirectTo: '/wishlist'
         });
     }
 ]);

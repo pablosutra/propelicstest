@@ -1,1 +1,27 @@
-<p>Caca</p>
+<!-- Options for wishList -->
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+			<h2>My wishlist Items</h2>
+			
+		</div>
+		<div class="col-xs-9">
+			<button class="btn btn-primary push-top-20">Set budget limit</button>
+		</div>
+	</div>
+	<div class="row push-top-20">
+		<div class="col-xs-3" ng-repeat="item in wishlistItems">
+				<div class="thumbnail">
+					<img ng-src="products/{{item.image || 'default_image.gif'}}" alt="{{item.name}}">
+				</div>
+				<div class="caption">
+					<p>{{item.price | currency}}</p>
+					<h3 class="text-info">{{item.name}}</h3>
+					<p>{{item.description}}</p>
+					<p>
+						<button class="btn btn-default">Send to purchased Items</button>
+					</p>
+				</div>
+		</div>
+	</div>
+</div>
