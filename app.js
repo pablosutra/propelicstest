@@ -6,7 +6,8 @@ var app = angular.module('app', [
     'ui.bootstrap',
     'layoutDirectives',
     'ItemsService',
-    'WishlistCtrl'
+    'WishlistCtrl',
+    'PurchasedCtrl'
 ]);
 
 app.config(['$routeProvider',
@@ -15,8 +16,30 @@ app.config(['$routeProvider',
             templateUrl: 'views/listItems.html',
             controller: 'WishlistCtrl'
         }).
+        when('/purchases', {
+            templateUrl: 'views/purchasedItems.html',
+            controller: 'PurchasedCtrl'
+        }).
+        when('/404', {
+            templateUrl: 'views/404.html'
+        }).
         otherwise({
-            redirectTo: '/wishlist'
+            redirectTo: '/404'
         });
     }
-]);
+]).run(['$rootScope',
+    function($rootScope) {
+        //Set initial budget to 0$
+        $rootScope.budget = $rootScope.budget || 0;
+        //Set spend total
+        $rootScope.spent = $rootScope.spent || 0;
+
+        //set total money available
+        $rootScope.available = $rootScope.available || 0;
+
+        //Set purchased Items
+        $rootScope.purchased = $rootScope.purchased || [];
+        //Call for getting items
+        $rootScope.wishlistItems = $rootScope.wishlistItems || [];
+    }
+])
