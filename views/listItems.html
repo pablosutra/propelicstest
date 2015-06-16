@@ -15,12 +15,14 @@
 					<img ng-src="products/{{item.image || 'default_image.gif'}}" alt="{{item.name}}">
 				</div>
 				<div class="caption">
-					<p>{{item.price | currency}}</p>
 					<h3 class="text-info">{{item.name}}</h3>
 					<p>{{item.description}}</p>
+
 					<p>
 						<button class="btn btn-default" ng-click="buyItem(item)">Buy Item</button>
 					</p>
+					<p class="text-success">{{item.price | currency}}</p>
+					<p class="text-warning">Last Modified {{formatDate(item.last_modified) | date : 'dd-MMMM-yyyy'}}</p>
 				</div>
 		</div>
 	</div>
