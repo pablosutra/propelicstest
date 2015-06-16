@@ -35,8 +35,36 @@ app.controller('WishlistCtrl', ['$scope', '$modal', '$rootScope', 'ItemsService'
                 });
         }
 
-        $scope.strToDate = function(date){
-        	return new Date(date);
+        $scope.strToDate = function(date) {
+            //check if is a date or not
+            if (!angular.isDate(date)) {
+                return new Date(date);
+            } else {
+                return date;
+            }
+
+        }
+        $scope.editItem = function(item){
+        	var modal = $modal.open({
+                templateUrl: 'views/modals/editItem.html',
+                resolve: {
+                    item: function(){
+                     return item;
+                    }
+                },
+                controller: itemModal
+            })
+            modal.result.then(function(item){
+            	_.map($rootScope.wishlistItems, function(wish){
+            		if(wish.id === item.id){
+            			wish.name =  item.name;
+            			wish.description = item.description;
+            			wish.price = item.price;
+            			wish.last_modified = new Date();
+            			
+            		}
+            	});
+            })
         }
         $scope.setBudgetLimit = function() {
             //Open modal to set Budget Limit
@@ -98,7 +126,7 @@ app.controller('WishlistCtrl', ['$scope', '$modal', '$rootScope', 'ItemsService'
                 //Removing the item from wishlist and passing to purchased items
                 $rootScope.purchased.push(item);
                 //Adding value to total money spent
-                $rootScope.spent+= item.price;
+                $rootScope.spent += item.price;
                 _.remove($scope.wishlistItems, function(i) {
                     return i.id === item.id;
                 })

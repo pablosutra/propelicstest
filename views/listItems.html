@@ -25,13 +25,14 @@
 				</a>
 			</div>
 			<div class="caption">
+				<button class="btn btn-warning" ng-click="editItem(item)"><i class="fa fa-pencil"></i></button>
 				<h3 class="text-info">{{item.name}}</h3>
 				<p>{{item.description}}</p>
 				<p>
 					<button class="btn btn-default" ng-click="buyItem(item)">Buy Item</button>
 				</p>
 				<p class="text-info">Price: <strong>{{item.price | currency}}</strong></p>
-				<p class="text-info">Last Modified: <strong>{{strToDate(item.last_modified) | date : 'dd MMMM of yyyy'}}</strong> </p>
+				<p class="text-info">Last Modified: <strong>{{strToDate(item.last_modified) | date : 'dd MMMM of yyyy HH:mm:ss'}}</strong> </p>
 			</div>
 		</div>
 	</div>

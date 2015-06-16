@@ -30,3 +30,13 @@ var promptModal = function($scope, $modalInstance, headerText, message, cancelBt
         $modalInstance.close($scope.val);
     }
 }
+
+var itemModal = function($scope, $modalInstance, item) {
+    $scope.item = _.clone(item);
+    $scope.close = function() {
+        $modalInstance.dismiss('cancel');
+    }
+    $scope.save = function() {
+        $modalInstance.close($scope.item);
+    }
+}
