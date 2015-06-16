@@ -5,7 +5,7 @@
 			<h2>My purchased Items <small class="text-info">Total Spent: {{spent}}</small></h2>
 		</div>
 		<div class="col-xs-6">
-			<div class="form-group">
+			<div class="form-group push-top-20">
 				<div class="input-group">
 					<div class="input-group-addon"><i class="fa fa-search"></i></div>
 					<input type="text" class="form-control" ng-model="purchasedFilter.name">
@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class="row push-top-20">
-		<div class="col-xs-3" ng-repeat="item in purchasedFilter">
+		<div class="col-xs-3" ng-repeat="item in purchased | filter: purchasedFilter">
 				<div class="thumbnail">
 					<img ng-src="products/{{item.image || 'default_image.gif'}}" alt="{{item.name | currency}}">
 				</div>

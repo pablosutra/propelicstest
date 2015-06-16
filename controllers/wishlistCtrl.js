@@ -44,26 +44,29 @@ app.controller('WishlistCtrl', ['$scope', '$modal', '$rootScope', 'ItemsService'
             }
 
         }
-        $scope.editItem = function(item){
-        	var modal = $modal.open({
-                templateUrl: 'views/modals/editItem.html',
+        $scope.editItem = function(item) {
+            var modal = $modal.open({
+                templateUrl: 'views/modals/itemForm.html',
                 resolve: {
-                    item: function(){
-                     return item;
+                    heading: function() {
+                        return "Editing ";
+                    },
+                    item: function() {
+                        return item;
                     }
                 },
                 controller: itemModal
             })
-            modal.result.then(function(item){
-            	_.map($rootScope.wishlistItems, function(wish){
-            		if(wish.id === item.id){
-            			wish.name =  item.name;
-            			wish.description = item.description;
-            			wish.price = item.price;
-            			wish.last_modified = new Date();
-            			
-            		}
-            	});
+            modal.result.then(function(item) {
+                _.map($rootScope.wishlistItems, function(wish) {
+                    if (wish.id === item.id) {
+                        wish.name = item.name;
+                        wish.description = item.description;
+                        wish.price = item.price;
+                        wish.last_modified = new Date();
+
+                    }
+                });
             })
         }
         $scope.setBudgetLimit = function() {
@@ -94,6 +97,29 @@ app.controller('WishlistCtrl', ['$scope', '$modal', '$rootScope', 'ItemsService'
                     $rootScope.available = val - $scope.spent;
                 }
             })
+        }
+        $scope.addItem = function() {
+            var modal = $modal.open({
+                templateUrl: 'views/modals/itemForm.html',
+                resolve: {
+                    heading: function() {
+                        return "new Product: ";
+                    },
+                    item: function() {
+                        return {};
+                    }
+                },
+                controller: itemModal
+            })
+            modal.result.then(function(item) {
+
+                //Temporary ID
+
+                item.id = $rootScope.wishlistItems.length+1;
+
+                item.last_modified = new Date();
+                $rootScope.wishlistItems.push(item);
+            });
         }
         $scope.buyItem = function(item) {
             var temAvailable = $scope.available - item.price;

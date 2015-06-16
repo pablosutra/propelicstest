@@ -31,8 +31,13 @@ var promptModal = function($scope, $modalInstance, headerText, message, cancelBt
     }
 }
 
-var itemModal = function($scope, $modalInstance, item) {
+var itemModal = function($scope, $modalInstance, item, heading) {
+    //For templating
+    $scope.heading = heading;
+    //Cloning for not affecting current item
     $scope.item = _.clone(item);
+    
+    //Functions for cancel/ok
     $scope.close = function() {
         $modalInstance.dismiss('cancel');
     }
