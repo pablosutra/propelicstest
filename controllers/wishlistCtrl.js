@@ -35,7 +35,7 @@ app.controller('WishlistCtrl', ['$scope', '$modal', '$rootScope', 'ItemsService'
                 });
         }
 
-        $scope.formatDate = function(date){
+        $scope.strToDate = function(date){
         	return new Date(date);
         }
         $scope.setBudgetLimit = function() {
